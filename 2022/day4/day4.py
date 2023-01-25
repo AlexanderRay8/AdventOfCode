@@ -1,6 +1,6 @@
 def read_input():
     data = []
-    with open('./2022/day4_input.txt', 'r') as f:
+    with open('./2022/day4/day4_input.txt', 'r') as f:
         data = [ x.strip() for x in f.readlines()]
     return data
 

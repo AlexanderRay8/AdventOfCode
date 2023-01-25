@@ -1,7 +1,7 @@
 
 def read_input():
     data = []
-    with open('./2022/day3_input.txt', 'r') as f:
+    with open('./2022/day3/day3_input.txt', 'r') as f:
         data = [ x.strip() for x in f.readlines()]
     return data
 

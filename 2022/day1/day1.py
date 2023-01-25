@@ -1,5 +1,5 @@
 data = []
-with open('./2022/day1_input.txt', 'r') as f:
+with open('./2022/day1/day1_input.txt', 'r') as f:
     cur = 0
     for line in f.readlines():
         line = line.strip()
