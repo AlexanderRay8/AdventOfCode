@@ -1,0 +1,11 @@
+
+def read_input():
+    input_lines = []
+    with open('%NEW_DIR%/day_%DAY%input.txt', 'r') as f:
+        input_lines = [x.strip() for x in f.readlines()]
+    return input_lines
+
+if __name__ == "__main__":
+    input_lines = read_input()
+
+    print(input_lines)
