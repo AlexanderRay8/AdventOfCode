@@ -1,6 +1,8 @@
 
-def read_input():
+def read_input(read_sample=True):
     input_lines = []
+    if read_sample:
+        return """""".splitlines()
     with open('%NEW_DIR%/day_%DAY%input.txt', 'r') as f:
         input_lines = [x.strip() for x in f.readlines()]
     return input_lines
