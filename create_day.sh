@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-ADVENT_HOME="$HOME/coding/AdventOfCode"
+ADVENT_HOME="$HOME/AdventOfCode"
 if [[ $# -eq 2 ]]
 then
     YEAR=$1
