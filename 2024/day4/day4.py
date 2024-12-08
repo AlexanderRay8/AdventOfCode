@@ -54,6 +54,20 @@ def search_perimeter(xmas_cnt, word_search, row, col):
                 xmas_cnt += follow_word(word_search, row, col, r, c)
     return xmas_cnt
 
+# Starts from 'A' in center
+def find_cross_mas(crossmas_cnt, word_search, row, col):
+    if (row+1 > len(word_search)-1 or row-1 < 0 or col-1 < 0 or 
+        col+1 > len(word_search)-1):
+        return False
+    return ((word_search[row-1][col-1] == 'M' and word_search[row+1][col+1] == 'S' and
+        word_search[row-1][col+1] == 'M' and word_search[row+1][col-1] == 'S') or
+        (word_search[row-1][col-1] == 'S' and word_search[row+1][col+1] == 'M' and
+        word_search[row-1][col+1] == 'S' and word_search[row+1][col-1] == 'M') or
+        (word_search[row-1][col-1] == 'M' and word_search[row+1][col+1] == 'S' and
+        word_search[row-1][col+1] == 'S' and word_search[row+1][col-1] == 'M') or
+        (word_search[row-1][col-1] == 'S' and word_search[row+1][col+1] == 'M' and
+        word_search[row-1][col+1] == 'M' and word_search[row+1][col-1] == 'S') )
+
 
 if __name__ == "__main__":
     input_lines = read_input()
@@ -65,3 +79,11 @@ if __name__ == "__main__":
                 xmas_cnt = search_perimeter(xmas_cnt, input_lines, r, c)
 
     print(xmas_cnt)
+
+    # Part 2
+    crossmas_cnt = 0
+    for r in range(len(input_lines)):
+        for c in range(len(input_lines[r])):
+            if input_lines[r][c] == 'A':
+                crossmas_cnt += find_cross_mas(crossmas_cnt, input_lines, r, c)
+    print(crossmas_cnt)

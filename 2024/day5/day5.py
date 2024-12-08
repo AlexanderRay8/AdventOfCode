@@ -20,5 +20,5 @@ def read_input(use_real_input=False):
 
 if __name__ == "__main__":
     input_lines = read_input()
-
+    
     print(input_lines)
