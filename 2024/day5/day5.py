@@ -4,7 +4,34 @@
 
 # Sample Input
 sample_input = """\
+47|53
+97|13
+97|61
+97|47
+75|29
+61|13
+75|53
+29|13
+97|29
+53|29
+61|53
+97|53
+61|29
+47|13
+75|47
+97|75
+47|61
+75|61
+47|29
+75|13
+53|13
 
+75,47,61,53,29
+97,61,53,29,13
+75,29,13
+75,97,47,61,53
+61,13,29
+97,13,75,29,47
 """.strip()
 
 def read_input(use_real_input=False):
@@ -19,6 +46,35 @@ def read_input(use_real_input=False):
 
 
 if __name__ == "__main__":
-    input_lines = read_input()
+    input_lines = read_input(True)
+    is_page_ordering = True
+    page_ordering = dict()
+    page_updates = []
+    for line in input_lines:
+        if line == "":
+            is_page_ordering = False
+            continue
+        if is_page_ordering:
+            required_page, page = line.split('|')
+            if page in page_ordering.keys():
+                page_ordering[page].add(required_page)
+            else:
+                page_ordering[page] = {required_page}
+        else:
+            page_updates.append(line.split(','))
+
+    middle_page_sum = 0
+    for update in page_updates:
+        is_update_valid = True
+        for i in range(len(update)):
+            after_pages = set(update[i:])
+            if update[i] not in page_ordering.keys():
+                continue
+            if page_ordering[update[i]].intersection(after_pages):
+                is_update_valid = False
+                break
+        
+        if is_update_valid:
+            middle_page_sum += int(update[len(update) // 2])
+    print(middle_page_sum)
     
-    print(input_lines)
