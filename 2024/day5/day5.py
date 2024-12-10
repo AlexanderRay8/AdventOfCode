@@ -43,10 +43,7 @@ def read_input(use_real_input=False):
             input_lines = [x.strip() for x in sample_input.splitlines(keepends=True)]
     return input_lines
 
-
-
-if __name__ == "__main__":
-    input_lines = read_input(True)
+def process_input(input_lines):
     is_page_ordering = True
     page_ordering = dict()
     page_updates = []
@@ -62,19 +59,32 @@ if __name__ == "__main__":
                 page_ordering[page] = {required_page}
         else:
             page_updates.append(line.split(','))
+    return page_ordering, page_updates
 
+if __name__ == "__main__":
+    input_lines = read_input(True)
+    page_ordering, page_updates = process_input(input_lines)
+    print(page_ordering)
     middle_page_sum = 0
     for update in page_updates:
         is_update_valid = True
-        for i in range(len(update)):
+        i = 0
+        while i < len(update):
             after_pages = set(update[i:])
             if update[i] not in page_ordering.keys():
+                i += 1
                 continue
-            if page_ordering[update[i]].intersection(after_pages):
+            wrong_updates = page_ordering[update[i]].intersection(after_pages)
+            if wrong_updates:
                 is_update_valid = False
-                break
-        
-        if is_update_valid:
+                for j in range(i, len(update)):
+                    if update[j] in wrong_updates:
+                        update[i], update[j] = update[j], update[i]
+                        break
+            else:
+                i += 1
+                
+        if not is_update_valid:
             middle_page_sum += int(update[len(update) // 2])
     print(middle_page_sum)
     
