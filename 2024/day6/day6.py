@@ -96,9 +96,16 @@ class Guard:
             self.advance_guard()
 
 if __name__ == "__main__":
-    input_lines = read_input(True)
+    input_lines = read_input(False)
     map = [list(line) for line in input_lines]
     guard = Guard(map)
+
+    # Obstacle needs to be placed first
+    # Then check if cycle
+    # Can't go halfway and then place behind
+    # Cycle needs to be same direction and starting position
+
+    
 
     while guard.pos is not None:
         guard.move_guard()
