@@ -24,8 +24,30 @@ def process_input(input_lines: list[str]):
         ranges.extend([l for l in line.split(',') if l != ''])
     return ranges
 
-if __name__ == "__main__":
-    input_lines = read_input()
-    ranges = process_input(input_lines)
+def validate_id(id: int):
+    str_id = str(id)
+    pattern = []
+    idx = 0
 
-    print(ranges)
+    for idx, digit in enumerate(str_id):
+        if idx + len(pattern) > len(str_id):
+            return False
+        if str_id[idx:idx + len(pattern)] == "".join(pattern) and len(pattern) > 0:
+            if "".join(pattern) * (len(str_id) // len(pattern)) == str_id and (len(str_id) // len(pattern) > 1):
+                return True
+        pattern.append(digit)
+    return "".join(pattern) * (len(str_id) // len(pattern)) == str_id and (len(str_id) // len(pattern) > 1)
+    
+
+if __name__ == "__main__":
+    input_lines = read_input(True)
+    ranges = process_input(input_lines)
+    id_sum = 0
+    for id_range in ranges:
+        start, end = [int(x) for x in id_range.split('-')]
+        for id in range(start, end+1):
+            is_valid = validate_id(id)
+            if is_valid:
+                id_sum += id
+
+    print(id_sum)
